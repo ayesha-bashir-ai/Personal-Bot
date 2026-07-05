@@ -1,19 +1,26 @@
 {
+  "version": 2,
   "builds": [
-    {
-      "src": "my-chatbot/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    },
     {
       "src": "api/chat.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "my-chatbot/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
     }
   ],
   "rewrites": [
     {
       "source": "/api/(.*)",
       "destination": "/api/chat"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/my-chatbot/$1"
     }
   ]
 }

@@ -59,17 +59,18 @@ async function fetchReply(question: string): Promise<string> {
       body: JSON.stringify({ question }),
     })
 
-    if (response.ok) {
-      const data = await response.json()
-      const reply = data?.reply?.trim()
-      if (reply) return reply
+    if (!response.ok) {
+      throw new Error('Backend request failed')
     }
-  } catch {
-    // fall back below
-  }
 
-  await new Promise((resolve) => setTimeout(resolve, 800))
-  return `You asked: "${question}". This is a mock reply because no local backend is running yet.`
+    const data = await response.json()
+    const reply = data?.reply?.trim()
+    if (reply) return reply
+    throw new Error('Invalid backend response')
+  } catch (error) {
+    console.error('fetchReply error:', error)
+    return 'Sorry, the server is unavailable.'
+  }
 }
 
 function GirlAvatar({ size = 52 }: { size?: number }) {
