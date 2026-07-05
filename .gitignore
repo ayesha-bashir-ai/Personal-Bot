@@ -18,4 +18,4 @@ dist/
 .DS_Store
 
 # Frontend folder (not necessary if node_modules/ is present, but kept for clarity)
-# my-chatbot/node_modules/
+my-chatbot/node_modules/
