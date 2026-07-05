@@ -1,0 +1,18 @@
+# Environment files
+.env
+
+# Node modules
+node_modules/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Vercel
+.vercel/
+
+# Build output
+dist/
+
+# OS files
+.DS_Store
