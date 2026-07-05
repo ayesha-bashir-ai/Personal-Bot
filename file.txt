@@ -1,0 +1,9 @@
+Backend:
+cd D:\Artificial intelligence\Personal_ChatBot\my-chatbot
+node server.js
+
+Frontend:
+cd D:\Artificial intelligence\Personal_ChatBot\my-chatbot
+
+cd my-chatbot
+npm run dev
