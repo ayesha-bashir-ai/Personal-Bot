@@ -1,4 +1,8 @@
-// Serverless API endpoint for chat replies
+import express from 'express'
+
+const app = express()
+app.use(express.json())
+
 const RESUME_SECTIONS = {
   intro: `Ayesha Bashir is an AI/ML engineer with hands-on experience building and training computer vision and NLP systems using Python and deep learning tools. She has developed a YOLOv8 object detection pipeline, built FastAPI endpoints for model inference, and combines practical ML applications with backend engineering.`,
   education: `B.Sc. Computer Science (BSCS) from Superior University, Lahore (2016–2020). Relevant coursework includes Machine Learning, Image Processing, Database Systems, Software Engineering, and Pattern Recognition.`,
@@ -32,17 +36,9 @@ function getReply(question) {
   return `Thanks for asking about Ayesha. I can answer questions about her intro, education, skills, projects, experience, certifications, hobbies, or contact details.`
 }
 
-module.exports = (req, res) => {
-  if (req.method !== 'POST') {
-    res.statusCode = 405
-    res.setHeader('Allow', 'POST')
-    res.end('Method Not Allowed')
-    return
-  }
+app.post('/api/chat', (req, res) => {
+  const question = req.body?.question || ''
+  res.json({ reply: getReply(question) })
+})
 
-  const body = req.body || {}
-  const question = body.question || ''
-  const reply = getReply(question)
-  res.setHeader('Content-Type', 'application/json')
-  res.end(JSON.stringify({ reply }))
-}
+export default app
